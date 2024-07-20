@@ -14,6 +14,7 @@ from litellm.utils import get_valid_models
 from pydantic import BaseModel
 from typing import Dict, Literal, Optional
 import xml.etree.ElementTree as ET
+import defusedxml.ElementTree
 
 
 GPT4_MODELS: Dict[str, int] = {
@@ -190,7 +191,7 @@ def validate_and_extract_tool_calls(assistant_content):
     try:
         # wrap content in root element
         xml_root_element = f"<root>{assistant_content}</root>"
-        root = ET.fromstring(xml_root_element)
+        root = defusedxml.ElementTree.fromstring(xml_root_element)
 
         # extract JSON data
         for element in root.findall(".//tool_call"):
