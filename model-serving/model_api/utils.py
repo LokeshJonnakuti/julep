@@ -1,6 +1,5 @@
 import re
 import string
-import random
 from typing import AsyncIterator, Any
 
 from interegular.patterns import _ParsePattern
@@ -18,6 +17,7 @@ from vllm.outputs import RequestOutput
 
 from .protocol import SamplingParams
 from .conversion.datatypes import ChatML
+import secrets
 
 
 ListOrStrList = str | list[str]
@@ -71,7 +71,7 @@ def validate_interegular_regex(pattern: str) -> bool:
 
 
 def random_tool_id(n: int = 8) -> str:
-    return "tool-" + "".join(random.choices(string.digits, k=n))
+    return "tool-" + "".join(secrets.SystemRandom().choices(string.digits, k=n))
 
 
 def remove_last_space(prompt: str):

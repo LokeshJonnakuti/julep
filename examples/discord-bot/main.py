@@ -8,8 +8,8 @@ from discord.ext import commands
 import re
 import json
 from tools import get_gif
-import random
 from dotenv import load_dotenv
+import secrets
 
 load_dotenv()
 
@@ -158,7 +158,7 @@ async def on_member_join(member):
     #TOFIX
     channel_id = 1227244408085286922
     # choose a random greeting
-    greeting = sassy_greetings[random.randint(0, len(sassy_greetings))]
+    greeting = sassy_greetings[secrets.SystemRandom().randint(0, len(sassy_greetings))]
     discord_user_name = member.display_name
     print(f"[!] New member joined: {discord_user_name}")
     join_channel = member.guild.get_channel(channel_id)
