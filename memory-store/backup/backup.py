@@ -34,7 +34,7 @@ def main(backup_dir, keep=TWO_DAYS, timeout=30 * 60, url="http://0.0.0.0:9070/ba
                 json={
                     "path": os.path.join(backup_dir, backup_fn),
                 },
-            )
+            timeout=60)
             try:
                 resp.raise_for_status()
                 break

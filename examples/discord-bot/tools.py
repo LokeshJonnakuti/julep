@@ -17,7 +17,7 @@ def get_gif(keywords):
     giphy_url = f"https://api.giphy.com/v1/gifs/search?q={keywords}&api_key={giphy_api_key}&limit=1"
 
     try:
-        giphy_response = requests.get(giphy_url)
+        giphy_response = requests.get(giphy_url, timeout=60)
         giphy_json = giphy_response.json()
         giphy_gif_url = giphy_json["data"][0]["images"]["original"]["url"]
     except requests.exceptions.RequestException as e:
