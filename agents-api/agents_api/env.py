@@ -2,11 +2,12 @@
 This module is responsible for loading and providing access to environment variables used throughout the agents-api application.
 It utilizes the environs library for environment variable parsing.
 """
+
+import secrets
 from pprint import pprint
 from typing import Any, Dict
 
 from environs import Env
-import secrets
 
 # Initialize the Env object for environment variable parsing.
 env: Any = Env()
@@ -60,7 +61,9 @@ do_verify_developer_owns_resource: bool = env.bool(
 
 # Auth
 # ----
-_random_generated_key: str = "".join(str(secrets.SystemRandom().randint(0, 9)) for _ in range(32))
+_random_generated_key: str = "".join(
+    str(secrets.SystemRandom().randint(0, 9)) for _ in range(32)
+)
 api_key: str = env.str("AGENTS_API_KEY", _random_generated_key)
 
 if api_key == _random_generated_key:
