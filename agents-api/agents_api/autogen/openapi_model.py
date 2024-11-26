@@ -128,7 +128,7 @@ def validate_python_expression(expr: str) -> tuple[bool, str]:
 
 
 def validate_jinja_template(template: str) -> tuple[bool, str]:
-    env = jinja2.Environment()
+    env = jinja2.Environment(autoescape=True)
     try:
         parsed_template = env.parse(template)
         for node in parsed_template.body:
